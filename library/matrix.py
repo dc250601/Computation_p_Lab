@@ -1,7 +1,10 @@
 import math
-import random
+# import random
 import sys
 import os
+
+from . import linalg
+from . import random
 
 class matrix:
     def __init__(self,matrix):
@@ -108,7 +111,7 @@ def matrix_init(shape, scheme):
                 row.append(0)
             z.append(row)
         return matrix(z)
-    
+
     z = []
     count =0
     for i in range(shape[0]):
