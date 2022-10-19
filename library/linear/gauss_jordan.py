@@ -1,5 +1,6 @@
 from .. import matrix
 from .. import linalg
+import copy
 # import math
 
 
@@ -55,3 +56,21 @@ def gauss_jordan(X, Y):
         unity(X, Y, i)
         row_zero(X, Y, i)
     return X, Y
+
+
+def inverter(X):
+    """
+    inverter:Function to invert a given matrix X
+    
+    args:
+    X: A object of type matrix whose inverse is to be found
+    """
+    columns = X.num_cols
+    rows = X.num_rows
+    inv_X = matrix.matrix_init(shape =(rows,columns), scheme="zero")
+    identity = matrix.matrix_init(shape=(rows,columns), scheme="identity")
+    for i in range(columns):
+        identity_column = identity.get_column(i)
+        _,inverted_column = gauss_jordan(copy.deepcopy(X),identity_column)
+        inv_X.assign_column(i,inverted_column)
+    return inv_X

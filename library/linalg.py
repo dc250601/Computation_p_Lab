@@ -62,7 +62,7 @@ def min_index(l):
         
     return idx
 
-def init_list(length, mode = "zero"):
+def init_list(length, mode = "zero", constant = 0):
     '''
     init_list 
     Funtion that initialises a list as per a given mode
@@ -70,12 +70,19 @@ def init_list(length, mode = "zero"):
     args:
     length: The length of the list to be initialised
     mode: The mode of initialization
+    constant: A scalar passed for initialization with constant values
     
     Supported modes-
     zero:- Initialize with all zeros
+    constant:- Initialize will all elements equal to the constant passed
     '''
     if mode == "zero":
         l = []
         for i in range(length):
             l.append(0)
+    if mode == "constant":
+        l = []
+        for i in range(length):
+            l.append(constant)
+
     return l

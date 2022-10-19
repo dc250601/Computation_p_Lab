@@ -98,11 +98,23 @@ def matrix_init(shape, scheme):
     scheme: Initialization scheme
 
     """
-    assert scheme in ("zero","LCG"), f" This function currently does not support {scheme} init"
+    assert scheme in ("zero","LCG","identity"), f" This function currently does not support {scheme} init"
     rand = []
     if scheme is "LCG":
         rand =random.LGC(no_sample=shape[0]*shape[1]*5)
         rand =linalg.scale_list(rand)
+    if scheme is "identity":
+        z =[]
+        for i in range(shape[0]):
+            row =[]
+            for j in range(shape[1]):
+                if i == j:
+                    row.append(1)
+                else:
+                    row.append(0)
+            z.append(row)
+        return matrix(z)
+
     else:
         z =[]
         for i in range(shape[0]):
