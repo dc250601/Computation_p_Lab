@@ -9,6 +9,12 @@ def sxx(x,y,dx):
         s = s+(x[i]/dx[i])**2
     return s
 
+def syy(x,y,dx):
+    length = len(x)
+    s = 0
+    for i in range(length):
+        s = s+(y[i]/dx[i])**2
+    return s
 
 def sxy(x,y,dx):
     length = len(x)
@@ -49,7 +55,8 @@ def linear_fit(x,y,dx=None):
     a2 = (sxy(x,y,dx)*s(x,y,dx) - sx(x,y,dx)*sy(x,y,dx))/(s(x,y,dx)*sxx(x,y,dx) - sx(x,y,dx)**2)
     error_a1 = (sxx(x,y,dx)/(s(x,y,dx)*sxx(x,y,dx) - sx(x,y,dx)**2))**0.5
     error_a2 = (s(x,y,dx)/(s(x,y,dx)*sxx(x,y,dx) - sx(x,y,dx)**2))**0.5
-    return a1, a2, error_a1, error_a2
+    r2 = sxy(x,y,dx)**2/(sxx(x,y,dx)*syy(x,y,dx))
+    return a1, a2, error_a1, error_a2, r2
 
 
 def elem(x, k):
