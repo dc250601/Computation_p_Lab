@@ -1,4 +1,5 @@
-def regula(guess1, guess2, func):
+from .bisection import bracketing
+def regula(guess1, guess2, func,shift = 1.5, max_iter=12,eps = 1e-6):
     """
     regula: A function to find the roots of a function using regula falsi
 
@@ -10,17 +11,26 @@ def regula(guess1, guess2, func):
     x0 = guess1
     x1 = guess2
     if func(guess1)*func(guess2)>0:
-        print("Give another guess")
-        print("Exiting...")
+        x0,x1 = bracketing(guess1, guess2, func, shift=shift, max_iter=max_iter)
     else:
         pass
+    hist = []
+    counter =0
     while(True):
+        counter = counter +1
         x = (x0*func(x1) - x1*func(x0))/(func(x1) - func(x0))
         if func(x1)*func(x)<0:
             x0 = x
         if func(x1)*func(x)>0:
             x1 = x
-        if abs(func(x))>1e-6:
+        hist.append((x0,x1))
+        if (abs(func(x0) > eps)) and (abs(func(x1)) > eps):
             pass
+
         else:
-            return x
+               if abs(func(x0))<eps:
+                   return x0,hist
+               else:
+                   return x1,hist
+        if counter > 1000:
+               print("Max iter reached")

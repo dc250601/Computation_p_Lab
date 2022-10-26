@@ -17,7 +17,7 @@ def root_check(a, root, eps):
     sum_ = 0
     for i in range(len(a)):
         sum_ = sum_ +a[i]*((root)**(len(a)-i-1))
-    if abs(sum_) < 1e-5:
+    if abs(sum_) < eps:
         return True
     else:
         return False

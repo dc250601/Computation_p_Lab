@@ -13,7 +13,6 @@ def bracketing(a, b, func, shift=1.5, max_iter=12):
 
     for i in range(max_iter):
         if func(a)*func(b) < 0:
-            print("Bracketing Done !!")
             return a, b
         else:
             if abs(func(a)) < abs(func(b)):
@@ -42,15 +41,16 @@ def bisection(a, b, func, eps=1e-6, delta=1e-6,shift=1.5, max_iter=12):
         temp = a
         a = b
         b = temp
+    hist  =[]
 
     if func(a)*func(b)<0:
         pass
     else:
         a,b = bracketing(a, b, func, shift, max_iter)
-
+    
     if abs(b-a) < eps and abs(func(a)) < delta:
         print("Done, root found")
-        return a
+        return a,hist
 
     while(abs(b-a) > eps and abs(func(a)) > delta):
         c = (a+b)/2
@@ -58,5 +58,6 @@ def bisection(a, b, func, eps=1e-6, delta=1e-6,shift=1.5, max_iter=12):
             b = c
         if func(c)*func(b)<0:
             a = c
+        hist.append((a,b))
 
-    return a
+    return a,hist
