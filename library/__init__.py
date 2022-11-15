@@ -6,3 +6,4 @@ from . import io
 from . import fitting
 from . import root_finding
 from . import interpolation
+from .integration import integrate, monte_carlo_integration

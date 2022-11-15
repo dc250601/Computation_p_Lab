@@ -77,7 +77,7 @@ def matmul(A, B):
         return sum_
 
     assert A.num_cols == B.num_rows, "Multiplication shape not matched for the matrices"
-    new_matrix = random_matrix((A.num_rows,B.num_cols))
+    new_matrix = matrix_init((A.num_rows,B.num_cols),scheme = "zero")
     for row in range(new_matrix.num_rows):
         for col in range(new_matrix.num_cols):
             elem = dot(A.get_row(row),B.get_column(col))
@@ -85,9 +85,28 @@ def matmul(A, B):
     return new_matrix
 
 
+def dot(l1,l2):
+    """
+    Function to calculate the dot product of two lists that are in matrix form
+    """
+    sum_ = 0
+    assert l1.num_rows==l2.num_rows, "Shapes not matched"
+    for i in range(l1.num_rows):
+        sum_ = sum_ + l1.matrix[i][0]*l2.matrix[i][0]
+    return sum_
 
 
-
+def normalize_matrix_list(mat_list):
+    """
+    Function to return the normalised value of a list which is in matrix form
+    """
+    val = 0
+    for i in range(mat_list.num_rows):
+        val = val + mat_list.matrix[i][0]**2
+    val = val**0.5
+    for i in range(mat_list.num_rows):
+        mat_list.matrix[i][0] = mat_list.matrix[i][0]/val
+    
 
 def matrix_init(shape, scheme):
     """
