@@ -7,3 +7,5 @@ from . import fitting
 from . import root_finding
 from . import interpolation
 from .integration import integrate, monte_carlo_integration
+from . import differential_equation
+from .eigen import power_iteration_method as Eigen_Value_Power_Iteration
